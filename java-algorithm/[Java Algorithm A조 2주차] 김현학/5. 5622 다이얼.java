@@ -28,16 +28,13 @@ public class Main {
         sc.close();
 
         int[] timeMap = new int[1 + 'Z' - 'A'];
-        int[] relation = {3, 3, 3, 3, 3, 4, 3, 4};
-        int alpha = 'A';
+        int[] nCharsForEachDial = {0, 0, 3, 3, 3, 3, 3, 4, 3, 4};
+        int[] timeTakenForEachDial = {11, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
-        for (int n = 0, i = 0; i < relation.length; ) {
-            timeMap[alpha++ - 'A'] = 3 + i;
-            if (++n == relation[i]) {
-                n = 0;
-                ++i;
-            }
-        }
+        for (int nDial = 2, alpha = 'A'; nDial <= 9; ++nDial)
+            for (int n = 0; n < nCharsForEachDial[nDial]; ++n)
+                timeMap[alpha++ - 'A'] = timeTakenForEachDial[nDial];
+
         int timeSum = 0;
         for (char c : chars) timeSum += timeMap[c - 'A'];
         System.out.println(timeSum);
